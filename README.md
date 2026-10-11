@@ -26,7 +26,7 @@ Edit `config.example.json` or make your own JSON config with a `feeds` array. Ev
 ## What the report means
 
 - Every item links to the original source. The source name and feed publication string are kept when supplied.
-- Relevance is a simple keyword count. Categories are keyword rules. Neither is an investment recommendation or an independently verified fact.
+- Every topic keyword must appear in the title or summary. Relevance is a simple keyword count. Categories are keyword rules. Neither is an investment recommendation or an independently verified fact.
 - Missing items may result from publisher feed coverage, feed errors, or the topic filter. Partial feed failures are printed to stderr and recorded in `report.json`.
 - The tool does not infer founders, funding amounts, valuations, or trend scores without source evidence.
 

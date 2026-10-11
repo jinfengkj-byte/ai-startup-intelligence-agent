@@ -72,9 +72,9 @@ def parse_feed(data: bytes, feed_url: str, topic: str) -> list[Item]:
             continue
         haystack = f"{title} {summary}".lower()
         terms = [term.lower() for term in re.findall(r"[\w-]+", topic) if len(term) > 2]
-        score = sum(3 if term in title.lower() else 1 for term in terms if term in haystack)
-        if terms and score == 0:
+        if terms and not all(term in haystack for term in terms):
             continue
+        score = sum(3 if term in title.lower() else 1 for term in terms if term in haystack)
         category = next((name for name, words in TAGS.items() if any(word in haystack for word in words)), "other")
         result.append(Item(title, url, source, published, summary[:500], category, score))
     return result
