@@ -3,5 +3,8 @@
   <title>Demo startup feed</title>
   <item><title>Example AI agent startup launches an API</title><link>https://example.org/articles/agent-api</link><description>Synthetic demo item for the local quickstart. No real company or launch is claimed.</description><pubDate>Sun, 11 Oct 2026 00:00:00 GMT</pubDate></item>
   <item><title>Example AI agent startup launches an API</title><link>https://example.org/articles/agent-api?utm_source=demo</link><description>Duplicate item used to demonstrate deduplication.</description></item>
+  <item><title>Northstar Labs AI agent startup announces a fictional funding round</title><link>https://example.org/articles/northstar-funding</link><description>Synthetic funding signal. The company, round, and article are fictional and used only to demonstrate a watchlist.</description><pubDate>Sat, 10 Oct 2026 00:00:00 GMT</pubDate></item>
+  <item><title>VectorWorks publishes an open-source AI agent toolkit</title><link>https://example.org/articles/vectorworks-open-source</link><description>Synthetic open-source signal for the offline demo. No real release is claimed.</description><pubDate>Fri, 09 Oct 2026 00:00:00 GMT</pubDate></item>
+  <item><title>Harbor AI agent platform releases a fictional product update</title><link>https://example.org/articles/harbor-update</link><description>Synthetic product signal showing a second company with a fresh source link.</description><pubDate>Thu, 08 Oct 2026 00:00:00 GMT</pubDate></item>
   <item><title>Unrelated garden article</title><link>https://example.org/articles/garden</link><description>Should be filtered by the topic.</description></item>
 </channel></rss>

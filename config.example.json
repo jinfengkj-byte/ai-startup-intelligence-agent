@@ -1,6 +1,12 @@
 {
+  "topic": "AI",
   "feeds": [
     {"name": "Hacker News AI", "url": "https://hnrss.org/newest?q=AI"},
     {"name": "TechCrunch AI", "url": "https://techcrunch.com/category/artificial-intelligence/feed/"}
+  ],
+  "companies": [
+    {"name": "OpenAI", "aliases": [], "website": "https://openai.com"},
+    {"name": "Anthropic", "aliases": [], "website": "https://www.anthropic.com"},
+    {"name": "Perplexity", "aliases": ["Perplexity AI"], "website": "https://www.perplexity.ai"}
   ]
 }

@@ -5,6 +5,10 @@ __pycache__/
 .pytest_cache/
 output/
 output-live/
+demo-output/
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
 reports/
 .env
 config.json

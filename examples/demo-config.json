@@ -1,0 +1,10 @@
+{
+  "topic": "AI agent",
+  "feeds": [{"name": "Synthetic demo", "url": "https://example.org/feed.xml"}],
+  "companies": [
+    {"name": "Example AI", "aliases": ["Example AI agent startup"], "website": "https://example.org"},
+    {"name": "Northstar Labs", "aliases": [], "website": "https://example.org"},
+    {"name": "VectorWorks", "aliases": [], "website": "https://example.org"},
+    {"name": "Harbor AI", "aliases": [], "website": "https://example.org"}
+  ]
+}

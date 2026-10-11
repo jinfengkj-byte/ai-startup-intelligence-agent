@@ -10,14 +10,14 @@ import xml.etree.ElementTree as ET
 from dataclasses import asdict, dataclass
 from datetime import datetime, timezone
 from pathlib import Path
-from urllib.parse import urlparse, urlunparse
+from urllib.parse import parse_qsl, urlencode, urlparse, urlunparse
 
-USER_AGENT = "AIStartupIntelligenceAgent/0.1 (+https://github.com/jinfengkj-byte/ai-startup-intelligence-agent)"
+USER_AGENT = "OpenStartupRadar/0.2 (+https://github.com/jinfengkj-byte/open-startup-radar)"
 ATOM = "{http://www.w3.org/2005/Atom}"
 TAGS = {
     "funding": ("funding", "raised", "series a", "series b", "investment", "acquisition"),
-    "product": ("launch", "release", "product", "api", "model", "agent"),
     "open-source": ("open source", "open-source", "github", "repository"),
+    "product": ("launch", "release", "product", "api", "model", "agent"),
 }
 
 
@@ -40,7 +40,8 @@ def canonical_url(value: str) -> str:
     parsed = urlparse(value.strip())
     if parsed.scheme not in ("http", "https") or not parsed.netloc:
         return ""
-    return urlunparse((parsed.scheme.lower(), parsed.netloc.lower(), parsed.path.rstrip("/") or "/", "", "", ""))
+    query = urlencode(sorted((key, value) for key, value in parse_qsl(parsed.query, keep_blank_values=True) if not key.lower().startswith("utm_") and key.lower() not in {"fbclid", "gclid"}))
+    return urlunparse((parsed.scheme.lower(), parsed.netloc.lower(), parsed.path.rstrip("/") or "/", "", query, ""))
 
 
 def fetch_feed(url: str, timeout: int = 15) -> bytes:
@@ -50,7 +51,10 @@ def fetch_feed(url: str, timeout: int = 15) -> bytes:
     with urllib.request.urlopen(request, timeout=timeout) as response:
         if response.status != 200:
             raise ValueError(f"Feed returned HTTP {response.status}: {url}")
-        return response.read(2_000_001)[:2_000_000]
+        data = response.read(2_000_001)
+        if len(data) > 2_000_000:
+            raise ValueError(f"Feed exceeds the 2 MB limit: {url}")
+        return data
 
 
 def parse_feed(data: bytes, feed_url: str, topic: str) -> list[Item]:
@@ -71,7 +75,7 @@ def parse_feed(data: bytes, feed_url: str, topic: str) -> list[Item]:
         if not title or not url:
             continue
         haystack = f"{title} {summary}".lower()
-        terms = [term.lower() for term in re.findall(r"[\w-]+", topic) if len(term) > 2]
+        terms = [term.lower() for term in re.findall(r"[\w-]+", topic) if len(term) >= 2 and term.lower() not in {"and", "the", "for", "with", "from"}]
         if terms and not all(term in haystack for term in terms):
             continue
         score = sum(3 if term in title.lower() else 1 for term in terms if term in haystack)
