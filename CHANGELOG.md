@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.2.1
+
+- Attribute release entries from configured official company feeds even when a title contains only a version number.
+- Include verified OpenAI and Anthropic Python SDK release feeds in the example config.
+
 ## 0.2.0
 
 - Brand the product as Open Startup Radar.

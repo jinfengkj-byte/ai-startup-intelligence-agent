@@ -12,7 +12,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from urllib.parse import parse_qsl, urlencode, urlparse, urlunparse
 
-USER_AGENT = "OpenStartupRadar/0.2 (+https://github.com/jinfengkj-byte/open-startup-radar)"
+USER_AGENT = "OpenStartupRadar/0.2.1 (+https://github.com/jinfengkj-byte/open-startup-radar)"
 ATOM = "{http://www.w3.org/2005/Atom}"
 TAGS = {
     "funding": ("funding", "raised", "series a", "series b", "investment", "acquisition"),
@@ -30,6 +30,7 @@ class Item:
     summary: str
     category: str
     relevance: int
+    company_hint: str | None = None
 
 
 def clean(value: str | None) -> str:

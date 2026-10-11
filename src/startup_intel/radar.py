@@ -8,6 +8,7 @@ import re
 import sqlite3
 import xml.etree.ElementTree as ET
 from contextlib import closing
+from dataclasses import replace
 from pathlib import Path
 
 from .core import Item, fetch_feed, parse_feed, rank_items, utc_now
@@ -31,6 +32,8 @@ def load_config(path: Path) -> dict:
 
 
 def match_company(item: Item, companies: list[dict]) -> str | None:
+    if item.company_hint:
+        return item.company_hint
     # The title takes precedence. Feed summaries often mention several companies.
     for text in (item.title, item.summary):
         matches = []
@@ -111,7 +114,10 @@ def scan(config: dict, db_path: Path, *, fixture: Path | None = None, limit: int
     for feed in feeds:
         try:
             data = fixture.read_bytes() if fixture else fetch_feed(feed["url"])
-            collected.extend(parse_feed(data, feed["url"], topic))
+            rows = parse_feed(data, feed["url"], feed.get("topic", topic))
+            if feed.get("company"):
+                rows = [replace(row, company_hint=feed["company"], relevance=max(row.relevance, 5)) for row in rows]
+            collected.extend(rows)
         except (OSError, ValueError, KeyError, TypeError, ET.ParseError) as error:
             errors.append(f"{feed.get('name', feed.get('url', 'feed'))}: {error}")
     if len(errors) == len(feeds):

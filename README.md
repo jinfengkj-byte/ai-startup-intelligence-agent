@@ -35,7 +35,7 @@ startup-radar scan --config config.example.json --output output
 startup-radar serve --output output
 ```
 
-Edit the example config to set your topic, feed URLs, and companies. `companies` may include aliases and website links. Your report is saved as `output/index.html`, `output/report.md`, and `output/report.json`; `output/history.sqlite` stores the seen-link history. The generated HTML also opens directly from disk, so the local server is optional.
+Edit the example config to set your topic, feed URLs, and companies. `companies` may include aliases and website links. A feed can set `"company"` and `"topic": ""` to attribute every entry from an official company feed, including release titles that contain only a version number. The example includes official GitHub release feeds for OpenAI and Anthropic Python SDKs. Your report is saved as `output/index.html`, `output/report.md`, and `output/report.json`; `output/history.sqlite` stores the seen-link history. The generated HTML also opens directly from disk, so the local server is optional.
 
 ```json
 {

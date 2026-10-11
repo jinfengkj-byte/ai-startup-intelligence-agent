@@ -2,7 +2,9 @@
   "topic": "AI",
   "feeds": [
     {"name": "Hacker News AI", "url": "https://hnrss.org/newest?q=AI"},
-    {"name": "TechCrunch AI", "url": "https://techcrunch.com/category/artificial-intelligence/feed/"}
+    {"name": "TechCrunch AI", "url": "https://techcrunch.com/category/artificial-intelligence/feed/"},
+    {"name": "OpenAI Python releases", "url": "https://github.com/openai/openai-python/releases.atom", "topic": "", "company": "OpenAI"},
+    {"name": "Anthropic Python releases", "url": "https://github.com/anthropics/anthropic-sdk-python/releases.atom", "topic": "", "company": "Anthropic"}
   ],
   "companies": [
     {"name": "OpenAI", "aliases": [], "website": "https://openai.com"},

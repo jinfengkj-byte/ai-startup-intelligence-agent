@@ -10,6 +10,16 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 class RadarTests(unittest.TestCase):
+    def test_official_atom_feed_attribution_without_keywords(self):
+        atom = b'<feed xmlns="http://www.w3.org/2005/Atom"><title>Releases</title><entry><title>v1.2.3</title><link href="https://github.com/example/sdk/releases/tag/v1.2.3"/><summary>Bug fixes</summary></entry></feed>'
+        config = {"topic": "AI agent", "feeds": [{"name": "Official", "url": "https://github.com/example/sdk/releases.atom", "topic": "", "company": "Example AI"}], "companies": [{"name": "Example AI"}]}
+        with tempfile.TemporaryDirectory() as folder:
+            fixture = Path(folder) / "feed.xml"
+            fixture.write_bytes(atom)
+            report = scan(config, Path(folder) / "history.sqlite", fixture=fixture)
+        self.assertEqual(report["signals"][0]["company"], "Example AI")
+        self.assertEqual(report["signals"][0]["title"], "v1.2.3")
+
     def test_first_scan_then_repeat_tracks_only_new_links(self):
         config = load_config(ROOT / "examples" / "demo-config.json")
         fixture = ROOT / "examples" / "demo-feed.xml"
