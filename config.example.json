@@ -1,0 +1,6 @@
+{
+  "feeds": [
+    {"name": "Hacker News AI", "url": "https://hnrss.org/newest?q=AI"},
+    {"name": "TechCrunch AI", "url": "https://techcrunch.com/category/artificial-intelligence/feed/"}
+  ]
+}

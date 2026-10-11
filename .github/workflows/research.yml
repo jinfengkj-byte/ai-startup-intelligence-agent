@@ -1,0 +1,26 @@
+name: Research report
+on:
+  workflow_dispatch:
+    inputs:
+      topic:
+        description: Topic or keywords
+        required: true
+        default: AI startup
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -e .
+      - run: startup-intel --topic "$RESEARCH_TOPIC" --config config.example.json --output output
+        env:
+          RESEARCH_TOPIC: ${{ inputs.topic }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: startup-intelligence-report
+          path: output/

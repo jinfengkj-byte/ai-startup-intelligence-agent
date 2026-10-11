@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"><channel>
+  <title>Demo startup feed</title>
+  <item><title>Example AI agent startup launches an API</title><link>https://example.org/articles/agent-api</link><description>Synthetic demo item for the local quickstart. No real company or launch is claimed.</description><pubDate>Sun, 11 Oct 2026 00:00:00 GMT</pubDate></item>
+  <item><title>Example AI agent startup launches an API</title><link>https://example.org/articles/agent-api?utm_source=demo</link><description>Duplicate item used to demonstrate deduplication.</description></item>
+  <item><title>Unrelated garden article</title><link>https://example.org/articles/garden</link><description>Should be filtered by the topic.</description></item>
+</channel></rss>
